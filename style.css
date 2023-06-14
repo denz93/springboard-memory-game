@@ -1,0 +1,124 @@
+:root {
+  --bg: #161a1d;
+  --text: #e5e5e5;
+  --primary: #ffbe0b;
+
+  background: var(--bg);
+  color: var(--text);
+}
+dialog {
+  background: var(--bg);
+  color: var(--primary);
+}
+#game .card {
+  width: auto;
+  height: auto;
+  aspect-ratio: 1/1;
+  margin: 10px;
+  display: inline-block;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+#game {
+  perspective: 500px;
+  perspective-origin: 50% 50%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.card .back,
+.card .front {
+  position: absolute;
+  inset: 0;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  padding: .5em;
+}
+
+.front img, .back img {
+  object-fit: cover;
+}
+
+.front {
+  z-index: 2;
+  background: #8338ec;
+}
+
+.back {
+  z-index: 2;
+  background: #ffbe0b;
+  transform: rotateY(180deg);
+  
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  user-select: none;
+}
+
+.card.up {
+  transform: rotateY(180deg);
+}
+
+.card.up .front {
+  opacity: 0;
+}
+
+.card.matched .back {
+  filter: brightness(.5);
+}
+.card.matched .back::after {
+  content: "✔";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #06d6a0;
+}
+
+img {
+  pointer-events: none;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+dialog {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+dialog[open] {
+  display: flex;
+}
+#starter-modal .logo {
+  width: 120px;
+  height: 120px;
+}
+
+#starter-modal .logo img {
+  filter: invert(1);
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(10px);
+}
+
+button {
+  padding: .5em 1em;
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  outline: none;
+  color: var(--primary);
+}
